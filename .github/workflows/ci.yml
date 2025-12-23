@@ -76,9 +76,20 @@ jobs:
         shell: powershell
         run: |
           # Останавливаем контейнер, если он существует
-          docker stop mortgage-app 2>$null
+          $containerId = docker ps -q -f name=mortgage-app
+          if ($containerId) {
+            docker stop mortgage-app
+          } else {
+            Write-Host "Контейнер mortgage-app не запущен"
+          }
+          
           # Удаляем контейнер, если он существует
-          docker rm mortgage-app 2>$null
+          $containerIdAll = docker ps -aq -f name=mortgage-app
+          if ($containerIdAll) {
+            docker rm mortgage-app
+          } else {
+            Write-Host "Контейнер mortgage-app не существует"
+          }
       
       - name: Run new container
         shell: powershell
