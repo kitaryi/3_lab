@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class MortgageInput:
-    """Данные для расчёта ипотеки. Ипотека."""
+    """Данные для расчёта ипотеки. Ипотека. Реально ипотека"""
 
     principal: float  # сумма кредита
     annual_rate: float  # годовая ставка, % (например 10.5)
