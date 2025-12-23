@@ -69,14 +69,18 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Build Docker image on production
+        shell: powershell
         run: docker build -t mortgage-app:latest .
       
       - name: Stop and remove old container
+        shell: powershell
         run: |
-          docker stop mortgage-app || true
-          docker rm mortgage-app || true
+          # Останавливаем контейнер, если он существует
+          docker stop mortgage-app 2>$null
+          # Удаляем контейнер, если он существует
+          docker rm mortgage-app 2>$null
       
       - name: Run new container
+        shell: powershell
         run: |
           docker run -d --name mortgage-app -p 8000:8000 --restart unless-stopped mortgage-app:latest
-
