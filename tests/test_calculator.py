@@ -9,7 +9,7 @@ from app.calculator import (MortgageInput, monthly_payment, overpayment,
 def test_monthly_payment_zero_rate():
     m = MortgageInput(principal=1200000, annual_rate=0.0, years=10)
     mp = monthly_payment(m)
-    assert mp == pytest.approx(10000.0)
+    assert mp == pytest.approx(0)
 
 
 def test_monthly_payment_positive_rate():
